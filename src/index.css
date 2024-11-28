@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.slick-dots li button:before {
+  color: #9333EA !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #7E22CE !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.bg-gradient-custom {
+  background: linear-gradient(to right, #4F46E5, #7E22CE);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
