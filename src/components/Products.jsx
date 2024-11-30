@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useCart } from '../context/CartContext'
+import { FaShoppingCart } from 'react-icons/fa'
 
 function Products() {
   const { addToCart } = useCart()
@@ -71,32 +72,47 @@ function Products() {
           {products.map((product) => (
             <motion.div
               key={product.id}
-              whileHover={{ scale: 1.05 }}
-              className="group relative bg-gray-800 rounded-xl overflow-hidden h-[450px] flex flex-col"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+              className="group relative bg-gray-800 rounded-xl overflow-hidden shadow-xl"
             >
-              <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden bg-gray-800">
+              <div className="relative aspect-square bg-gray-800 overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-[350px] object-cover object-center group-hover:opacity-75 transition-opacity duration-200"
+                  className="w-full h-full object-cover object-center transform transition-transform duration-300 group-hover:scale-110"
                 />
-              </div>
-              <div className="flex-1 p-4 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-lg font-medium text-white">{product.name}</h3>
-                  <p className="mt-1 text-lg font-semibold text-purple-500">{product.price}</p>
-                </div>
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => addToCart(product)}
-                  className="mt-4 p-2 rounded-full bg-purple-600 text-white hover:bg-purple-700 transition-colors duration-200 w-full flex items-center justify-center space-x-2"
+                  className="absolute top-4 right-4 p-3 bg-purple-600 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-purple-700 shadow-lg"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
-                  <span>Adaugă în Coș</span>
+                  <FaShoppingCart className="h-5 w-5" />
                 </motion.button>
+              </div>
+
+              <div className="p-6">
+                <h3 className="text-lg font-semibold text-white mb-2 truncate">
+                  {product.name}
+                </h3>
+                <div className="flex items-center justify-between">
+                  <p className="text-xl font-bold text-purple-500">
+                    {product.price}
+                  </p>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => addToCart(product)}
+                    className="bg-purple-600/10 text-purple-500 px-4 py-2 rounded-full text-sm font-medium
+                             hover:bg-purple-600 hover:text-white transition-all duration-300"
+                  >
+                    Adaugă în Coș
+                  </motion.button>
+                </div>
               </div>
             </motion.div>
           ))}

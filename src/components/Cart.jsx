@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '../context/CartContext'
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaTrash } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
 function Cart() {
@@ -10,7 +10,8 @@ function Cart() {
     setIsCartOpen, 
     removeFromCart, 
     updateQuantity, 
-    getCartTotal 
+    getCartTotal,
+    clearCart 
   } = useCart()
   const navigate = useNavigate()
 
@@ -52,6 +53,19 @@ function Cart() {
             <p className="text-gray-400 text-center py-8">Coșul tău este gol</p>
           ) : (
             <>
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-sm text-gray-400">
+                  {cart.length} {cart.length === 1 ? 'produs' : 'produse'}
+                </span>
+                <button
+                  onClick={clearCart}
+                  className="flex items-center text-red-500 hover:text-red-600 text-sm"
+                >
+                  <FaTrash className="h-4 w-4 mr-2" />
+                  Golește Coșul
+                </button>
+              </div>
+
               <div className="flex-1 overflow-y-auto">
                 {cart.map((item) => (
                   <div key={item.id} className="flex items-center py-4 border-b border-gray-800">

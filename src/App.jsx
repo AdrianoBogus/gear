@@ -7,12 +7,15 @@ import Products from './components/Products'
 import Testimonials from './components/Testimonials'
 import Footer from './components/Footer'
 import Cart from './components/Cart'
-import Checkout from './components/Checkout'
+import CheckoutPage from './pages/CheckoutPage'
+import SuccessPage from './pages/SuccessPage'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <Router>
       <CartProvider>
+        <ScrollToTop />
         <div className="min-h-screen bg-gray-900">
           <Navbar />
           <Cart />
@@ -25,7 +28,8 @@ function App() {
                 <Testimonials />
               </>
             } />
-            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/success" element={<SuccessPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <Footer />
